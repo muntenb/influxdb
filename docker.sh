@@ -3,14 +3,14 @@
 function run {
 docker run -d -p 8086:8086 \
 	--restart always \
-	--name influxdb_cont \
-	--volume /home/pi/influxdb/config/influxdb.conf:/etx/influxdb/influxdb.conf:ro \
-	--volume /home/pi/influxdb/data:/var/lib/influxdb \
-	influxdb -config /etc/influxdb/influxdb.conf
+	--name influxdb \
+	--volume /home/pi/influxdb/config:/etc/influxdb2 \
+	--volume /home/pi/influxdb/data:/var/lib/influxdb2 \
+	influxdb:2
 }
 
 function attach {
-docker exec -it influxdb_cont influx
+docker exec -it influxdb influx
 }
 
 if [[ $# -ne 1 ]]; then
